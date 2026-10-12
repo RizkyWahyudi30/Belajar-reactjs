@@ -88,3 +88,62 @@ return (
 1. Memasukkan statement seperti `if` atau `for` langsung di dalam `{}`. Kurung kurawal hanya menerima ekspresi (sesuatu yang menghasilkan nilai). Untuk logika percabangan, pakai `ternary` atau `&&` (dibahas di materi 6).
 2. Menulis `style="color: red"` seperti HTML. Di JSX, style berupa objek: `style={{ color: "red" }}`.
 3. Menaruh objek langsung sebagai teks: `{user}` jika `user` adalah objek akan error. Tampilkan propertinya: `{user.nama}`.
+
+## 3. Props
+
+**Penjelasan**: _Props_ (kependekan dari properties) adalah data yang dikirim dari component **induk (parent)** ke **component anak (child)**. Analogi: fungsi punya parameter, component punya props. Dengan props, satu component bisa menampilkan hasil berbeda-beda.
+
+```jsx
+function KartuProfil({ nama, pekerjaan }) {
+  return (
+    <div>
+      <h3>{nama}</h3>
+      <p>{pekerjaan}</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <KartuProfil nama="Budi" pekerjaan="Programmer" />
+      <KartuProfil nama="Sari" pekerjaan="Desainer" />
+    </>
+  );
+}
+```
+
+Pada `{ nama, pekerjaan }` kita memakai destructuring, yaitu cara singkat mengambil properti dari objek. Tanpa itu, kodenya begini:
+
+```jsx
+
+```
+
+`children` adalah props spesial berisi apa pun yang ditulis di antara tag pembuka dan penutup:
+
+```jsx
+function Kotak({ children }) {
+  return <div className="kotak">{children}</div>;
+}
+
+<Kotak>
+  <h2>Judul</h2>
+  <p>Isi di dalam kotak</p>
+</Kotak>;
+```
+
+**Mengirim selain string**: string pakai tanda kutip, selain itu pakai {}:
+
+```jsx
+<KartuProfil
+  nama="Budi"
+  umur={20}
+  aktif={true}
+  hobi={["main bola", "coding"]}
+/>
+```
+
+Praktik yang baik
+
+- Beri **nilai default** untuk props opsional: `function Tombol({ warna = "biru" }).`
+-
